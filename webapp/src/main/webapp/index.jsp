@@ -5,5 +5,5 @@
 <h1> Good job fran </h1> 
 <h1> Good job Francine on learning Devops</h1>
 <h1> Thanks Serge for everything</h1>
-<h1> This Devops thing, I would like to become and Devops Engineer</h1>
+<h1> I am now a fully Devops Engineer</h1>
 
