@@ -1,6 +1,6 @@
 pipeline {
   agent any
-   statges {
+   stages {
      stage('Buiild') {
        steps {
         echo "Build Step"
