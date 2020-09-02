@@ -3,6 +3,12 @@ pipeline {
   tools {
     maven 'M2_HOME'
   }
+  environment {
+     registry = "nguimdofrancine/devops_pip" 
+        registryCredential = 'DockerID' 
+    
+  }
+  
    stages {
      stage('Build') {
        steps {
@@ -17,15 +23,12 @@ pipeline {
         sh 'mvn test'
        }
      } 
-       stage('deploy') {
-       steps {
-        echo "deploy Step"
-       }
-     } 
-       stage('docker') {
-       steps {
-        echo "image Step"
-        sleep 10
+       stage('Building our image') { 
+            steps { 
+             echo "deploy step" 
+             script { 
+              dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+          
        }
      } 
    }
