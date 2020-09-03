@@ -34,8 +34,8 @@ pipeline {
           script {
             checkout scm
             docker.withRegistry( '', DockerID ) { 
-            dockerImage = docker.build registry + ":$BUILD_NUMBER"
-              dockerImage.push("$BUILD_NUMBER")
+              dockerImage = docker.build("francinenguimdo/devops-pip:${env.BUILD_ID}")
+              dockerImage.push()
             }
           }
        }
