@@ -21,7 +21,7 @@ pipeline {
        steps { 
           script {
             checkout scm
-            docker.withRegistry( '', 'DockerRegistry' ) { 
+            docker.withRegistry( '', 'DockerID' ) { 
             def dockerImage = docker.build("francinenguimdo/devops-pip:${env.BUILD_ID}")
             dockerImage.push()
             }
