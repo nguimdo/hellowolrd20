@@ -3,11 +3,7 @@ pipeline {
   tools {
     maven 'M2_HOME'
   }
-  environment {
-     registry = "nguimdofrancine/devops_pip" 
-     registryCredential = 'DockerRegistry' 
-     dockerImage = ''
-  }
+  
   stages {
      stage('Build') {
        steps {
@@ -17,8 +13,7 @@ pipeline {
        }
      } 
      stage('test') {
-       steps {
-         echo "test Step"
+       steps { 
          sh 'mvn test'
        }
      } 
@@ -27,8 +22,8 @@ pipeline {
           script {
             checkout scm
             docker.withRegistry( '', DockerRegistry ) { 
-              dockerImage = docker.build("francinenguimdo/devops-pip:${env.BUILD_ID}")
-              dockerImage.push()
+            def dockerImage = docker.build("francinenguimdo/devops-pip:${env.BUILD_ID}")
+            dockerImage.push()
             }
           }
        }
