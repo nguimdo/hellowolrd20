@@ -31,9 +31,10 @@ pipeline {
      }
      stage('Deploy our image') { 
        steps { 
-          script { 
+          script {
+            checkout scm
             docker.withRegistry( '', registryCredential ) { 
-              dockerImage.push()
+              dockerImage.push("$BUILD_NUMBER")
             }
           }
        }
