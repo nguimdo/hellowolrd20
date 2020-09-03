@@ -17,29 +17,29 @@ pipeline {
        }
      } 
        stage('test') {
-        steps {
-        echo "test Step"
-        sh 'mvn test'
+         steps {
+         echo "test Step"
+         sh 'mvn test'
        }
      } 
-       stage('Building our image') { 
-        steps {  
-            script { 
-                dockerImage = docker.build registry + ":$BUILD_NUMBER" 
-       }
-     } 
-        stage('Deploy our image') { 
-        steps { 
+         stage('Building our image') { 
+           steps {  
+             script { 
+                dockerImage = docker.build registry + ":$BUILD_NUMBER"
+             }
+           }
+           stage('Deploy our image') { 
+             steps { 
               script { 
               docker.withRegistry( '', registryCredential ) { 
               dockerImage.push() 
+              }
+              }
              }
-             }
-            }
+           }
          }
-       }
   }
-}
+             
 
 
 
