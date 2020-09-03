@@ -33,7 +33,8 @@ pipeline {
        steps { 
           script {
             checkout scm
-            docker.withRegistry( '', registryCredential ) { 
+            docker.withRegistry( '', DockerID ) { 
+            dockerImage = docker.build registry + ":$BUILD_NUMBER"
               dockerImage.push("$BUILD_NUMBER")
             }
           }
