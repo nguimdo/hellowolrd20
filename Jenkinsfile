@@ -5,7 +5,8 @@ pipeline {
   }
   environment {
      registry = "nguimdofrancine/devops_pip" 
-     registryCredential = 'DockerID'    
+     registryCredential = 'DockerID' 
+     dockerImage = ''
   }
   stages {
      stage('Build') {
@@ -16,15 +17,15 @@ pipeline {
        }
      } 
        stage('test') {
-       steps {
+        steps {
         echo "test Step"
         sh 'mvn test'
        }
      } 
        stage('Building our image') { 
-       steps {  
-             script { 
-             docker.build registry + ":$BUILD_NUMBER" 
+        steps {  
+            script { 
+                dockerImage = docker.build registry + ":$BUILD_NUMBER" 
        }
      } 
         stage('Deploy our image') { 
