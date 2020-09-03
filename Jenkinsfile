@@ -5,7 +5,7 @@ pipeline {
   }
   environment {
      registry = "nguimdofrancine/devops_pip" 
-     registryCredential = 'DockerID' 
+     registryCredential = 'DockerRegistry' 
      dockerImage = ''
   }
   stages {
@@ -22,18 +22,11 @@ pipeline {
          sh 'mvn test'
        }
      } 
-     stage('Building our image') { 
-       steps {  
-         script { 
-                dockerImage = docker.build registry + ":$BUILD_NUMBER"
-             }
-           }
-     }
      stage('Deploy our image') { 
        steps { 
           script {
             checkout scm
-            docker.withRegistry( '', DockerID ) { 
+            docker.withRegistry( '', DockerRegistry ) { 
               dockerImage = docker.build("francinenguimdo/devops-pip:${env.BUILD_ID}")
               dockerImage.push()
             }
